@@ -23,12 +23,14 @@ const ContentHeader = ({
         console.log(e.target.value);
         onSearch({mode: 'SEARCH', query: e.target.value});
     }
-    const {mode, query } = searchConfig
+    const {mode } = searchConfig
     console.log("kkk", title);
     return (
     <div className="contentHeader">
          <div className="backIconContainer">
-            <img className="backIcon" src={`${API_BASE}/${IMAGE_ASSETS.BACK_ICON}`} onClick={onBackIconClick} /> 
+            <img 
+                alt="back from search"
+                className="backIcon" src={`${API_BASE}/${IMAGE_ASSETS.BACK_ICON}`} onClick={onBackIconClick} /> 
         </div>
         {
             mode === 'SEARCH' ?
@@ -39,6 +41,7 @@ const ContentHeader = ({
         }
         <div className="searchIconContainer">
             <img 
+                alt="search"
                 className="searchIcon" 
                 src={`${API_BASE}/${IMAGE_ASSETS.SEARCH_ICON}`}
                 onClick={onSearchIconClick}
