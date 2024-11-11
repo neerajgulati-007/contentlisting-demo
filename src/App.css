@@ -38,8 +38,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-
-  
+  margin-top: 50px; 
 }
 
 .content {
@@ -60,11 +59,9 @@
   min-height: 5rem;
   box-sizing: border-box;
   width: 100%;
-}
-
-.fixed-header { 
-  position: sticky;
-  z-index: 10;
+  height: 50px;
+  position: fixed;
+  top: 0px;
 }
 
 .searchIcon {
@@ -85,7 +82,7 @@
   font-size: 2rem;
   color: #FFF;
   padding: 1rem;
-  min-width: 72%;
+  width: 78%;
 }
 
 
@@ -94,7 +91,8 @@
 }
 
 .inputContainer {
-  min-width: 75%;
+  width: 78%;
+  padding: 1rem;
 }
 
 .inputContainer input {

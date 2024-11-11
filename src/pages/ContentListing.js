@@ -28,11 +28,14 @@ const ContentListing = () => {
             const pageMeta = contentResponse.page;
             setPageMeta(pageMeta);
             setLoading(false);
+            const { "total-content-items": totalContentItems,"page-size-returned": pageSizeReturned } = pageMeta
             if(+pageMeta["page-num-requested"] === 1) {
-                const { "total-content-items": totalContentItems,"page-size-returned": pageSizeReturned } = pageMeta
                 maxPages.current =  Math.ceil(+totalContentItems / +pageSizeReturned);
             }
-            setVisibleContent(cont => [...cont, ...(contentResponse?.page?.["content-items"]?.content || [])]);
+            setVisibleContent(cont => [
+                ...cont, 
+                ...((contentResponse?.page?.["content-items"]?.content || []).map((item, index) => ({...item, id: index + cont.length}))),
+            ]);
         }
 
     }, []);
@@ -80,7 +83,6 @@ const ContentListing = () => {
     }
 
     const regex = new RegExp(`${searchConfig.query}`, 'i');
-
     return (
         <div>
              <ContentHeader
@@ -89,7 +91,7 @@ const ContentListing = () => {
                 onSearch={handleSearch}
             />  
             <div className="gridContainer" >         
-                {[...visiblecontent.filter(item => searchConfig.query === '' || regex.test(item.name)).map((item, index) => <ContentCard  key={index} content={item} index={index} lastIndex={visiblecontent.length -1} ref={loaderRef}/>)]}
+                {[...visiblecontent.filter(item => searchConfig.query === '' || regex.test(item.name)).map((item, index) => <ContentCard  key={item.id} content={item} index={index} lastIndex={visiblecontent.length -1} ref={loaderRef}/>)]}
             </div>
         </div>
     )
