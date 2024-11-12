@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useState, useEffect, useCallback} from 'react';
 import { IMAGE_ASSETS, API_BASE } from '../constants';
 
 const ContentHeader = ({
@@ -10,23 +10,24 @@ const ContentHeader = ({
     const scrolledRef = useRef(false);
 
     const [isScrolled, setIsScrolled] = useState();
-    const onSearchIconClick = () => {
+    const onSearchIconClick = useCallback(() => {
         if(searchConfig.mode !== 'SEARCH') {
             onSearch({mode: 'SEARCH', query: ''});
         }
-    };
+    }, [searchConfig, onSearch]);
 
-    const onBackIconClick = () => {
+    const onBackIconClick = useCallback(() => {
         if(searchConfig.mode === 'SEARCH') {
             onSearch({mode: '', query: ''});
         }
-    };
+    }, [searchConfig, onSearch]);
 
 
-    const onSearchInput = (e) => {
+    const onSearchInput = useCallback(e => {
         console.log(e.target.value);
         onSearch({mode: 'SEARCH', query: e.target.value});
-    }
+    }, [onSearch]);
+
     const {mode } = searchConfig
 
     useEffect(() => {
@@ -59,7 +60,7 @@ const ContentHeader = ({
             {
                 mode === 'SEARCH' ?
                     <div className='inputContainer'>
-                        <input type="text" onChange={onSearchInput} autoFocus />
+                        <input type="text" onChange={onSearchInput} maxLength={30} autoFocus />
                     </div> : 
                     <div className="contentTitle">{title}</div>
             }

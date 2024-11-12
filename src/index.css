@@ -3,7 +3,11 @@ html {
   font-size: 10px;
   background: #171717;
   color: #FFFFFF; 
-  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;                /* Hide scrollbar in WebKit browsers */
 }
 body {
   margin: 0;

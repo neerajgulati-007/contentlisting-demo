@@ -37,6 +37,7 @@
 .gridContainer {
   display: flex;
   flex-wrap: wrap;
+  padding-left: 1rem;
   gap: 1rem;
   margin-top: 50px; 
 }
@@ -50,6 +51,7 @@
 .content .contentImg {
   width: 100%;
   height: auto;
+  aspect-ratio: 2/3;
 }
 
 .contentHeader {
@@ -62,6 +64,10 @@
   height: 50px;
   position: fixed;
   top: 0px;
+  transition: box-shadow 1s ease;  /* Smooth transition for shadow */
+}
+.contentHeader.sticky {
+  box-shadow: 0 18px 16px rgba(0, 0, 0, 0.9);
 }
 
 .searchIcon {

@@ -5,8 +5,8 @@ import ContentHeader from '../components/ConentHeader';
 
 const ContentListing = () => {
 
-    const [ visiblecontent,  setVisibleContent] = useState([]);
-    const [ pageMeta, setPageMeta] = useState({});
+    const [ visiblecontent,  setVisibleContent] = useState([]);//UI List
+    const [ pageMeta, setPageMeta] = useState({});//Page response
     const maxPages = useRef(1);
     const [loading, setLoading] = useState(true);
     const [pageNumber, setPageNumber] = useState(1)
@@ -55,7 +55,7 @@ const ContentListing = () => {
         if(observerRef.current) {
             observerRef.current.disconnect();
         }
-
+        //Observe Last element whenever it comes it in viewport to load next page
         observerRef.current = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -75,12 +75,12 @@ const ContentListing = () => {
         observerRef.current.observe(node);
     }, [loading]);
 
-    const handleSearch = ({mode, query}) => {
+    const handleSearch = useCallback(({mode, query}) => {
         setSearchConfig({
             mode,
             query,
         });
-    }
+    }, []);
 
     const regex = new RegExp(`${searchConfig.query}`, 'i');
     return (
